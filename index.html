@@ -59,7 +59,7 @@
         .then(function (data) {
             // Fill out all the data, then intitalize datatables
             appendData(data);
-
+            console.log('Data successfully loaded from API! Initializing Datatables.');
             initDataTables();
         })
         .catch(function (err) {
