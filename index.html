@@ -33,10 +33,6 @@
             <th>
                 Draw Reward
             </th>
-            <!-- TODO: Figure out a way to squish these links so they don't take up a huge amount of screenspace -->
-            <th>
-                Link
-            </th>
             <th>
                 Play Time
             </th>
@@ -48,6 +44,10 @@
             </th>
             <th>
                 Profit per Card
+            </th>
+            <!-- TODO: Figure out a way to squish these links so they don't take up a huge amount of screenspace -->
+            <th>
+                Link
             </th>
         </tr>
         </thead>
@@ -123,11 +123,11 @@
                 <td>${data[i].Team2.Name}</td>
                 <td>${data[i].Team2.Reward}</td>
                 <td>${data[i].Draw.Reward}</td>
-                <td><a target="_blank" href=${data[i].PlayUrl}>${data[i].PlayUrl}</a></td>
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts}</td>
                 <td>${ProfitPerCard}</td>
+                <td><a target="_blank" href=${data[i].PlayUrl}>${data[i].PlayUrl}</a></td>
                 `;
                 mainContainer.appendChild(tr);
             }
@@ -145,10 +145,10 @@
             ],
             responsive: true,
             // Order by the date column, ascending.
-            order: [[ 6, "asc" ]],
+            order: [[ 5, "asc" ]],
             // Disallow sorting by bet amount column
             "columnDefs": [
-                { "orderable": false, "targets": 8 }
+                { "orderable": false, "targets": 7 }
             ],
             fixedHeader: true
         });
