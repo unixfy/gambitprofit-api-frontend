@@ -65,7 +65,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <script>
-    fetch('https://api.gambitprofit.com/gambit-plays')
+    // We fetch only the 100 most recent results in the API
+    fetch('https://api.gambitprofit.com/gambit-plays?_limit=100&_sort=createdAt:DESC')
         .then(function (response) {
             return response.json();
         })
