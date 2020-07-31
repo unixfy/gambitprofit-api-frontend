@@ -40,7 +40,7 @@
                 Bet Method
             </th>
             <th>
-                Bet Amounts
+                Bet Amounts (300 tokens)
             </th>
             <th>
                 Profit per Card
@@ -127,7 +127,7 @@
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts}</td>
                 <td>${ProfitPerCard}</td>
-                <td><a target="_blank" href=${data[i].PlayUrl}>${data[i].PlayUrl}</a></td>
+                <td><a target="_blank" href=${data[i].PlayUrl} data-export="test">${data[i].PlayUrl}</a></td>
                 `;
                 mainContainer.appendChild(tr);
             }
