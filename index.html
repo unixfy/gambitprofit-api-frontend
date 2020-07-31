@@ -68,10 +68,18 @@
     function appendData(data) {
         let mainContainer = document.getElementById("appendData");
         for (let i = 0; i < data.length; i++) {
-            // We only want to display plays that haven't already started and that are profitable
+            // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
             if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
                 var tr = document.createElement("tr");
-                tr.innerHTML = '<td>' + data[i].Team1.Name + '</td><td>' + data[i].Team1.Reward + '</td><td>' + data[i].Team2.Name + '</td><td>' + data[i].Team2.Reward + '</td><td>' + data[i].Draw.Reward + '</td><td><a target="_blank" href=' + data[i].PlayUrl + '>Click</a></td><td data-order="' + data[i].PlayDate + '">' + moment(data[i].PlayDate).calendar() + '</td>';
+                tr.innerHTML = `
+                <td>${data[i].Team1.Name}</td>
+                <td>${data[i].Team1.Reward}</td>
+                <td>${data[i].Team2.Name}</td>
+                <td>${data[i].Team2.Reward}</td>
+                <td>${data[i].Draw.Reward}</td>
+                <td><a target="_blank" href=${data[i].PlayUrl}>Click</a></td>
+                <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
+                `;
                 mainContainer.appendChild(tr);
             }
         }
