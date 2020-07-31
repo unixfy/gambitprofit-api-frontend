@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GambitProfit.com API Frontend</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/r-2.2.5/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-html5-1.6.2/r-2.2.5/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/fh-3.1.7/r-2.2.5/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/fh-3.1.7/r-2.2.5/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -38,6 +38,7 @@
             <th>
                 Draw Reward
             </th>
+            <!-- TODO: Figure out a way to squish these links so they don't take up a huge amount of screenspace -->
             <th>
                 Link
             </th>
@@ -46,6 +47,12 @@
             </th>
             <th>
                 Best Bet Method
+            </th>
+            <th>
+                Bet Amounts
+            </th>
+            <th>
+                Profit per Card
             </th>
         </tr>
         </thead>
@@ -75,6 +82,38 @@
             // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
             if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
                 let tr = document.createElement("tr");
+                // Logic to generate the bet amounts and stuff based on the recommended play
+                if (data[i].Calc.Recommended == "HighRisk") {
+                    var BetAmounts = `
+                    Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}
+                    `
+                    var ProfitPerCard = '$' + data[i].Calc.HighRisk.ProfitPerCard;
+                } else if (data[i].Calc.Recommended == "MedRisk") {
+                    var BetAmounts = `
+                    Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn}
+                    and
+                    <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}
+                    `
+                    var ProfitPerCard =  '$' + data[i].Calc.MedRisk.ProfitPerCard;
+                } else if (data[i].Calc.Recommended == "NoRisk") {
+                    // Need more logic to display different strings depending if there is a draw condition
+                    if (data[i].Calc.NoRisk.DrawBetAmount) {
+                        var BetAmounts = `
+                        Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name},
+                        <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name},
+                        and <b>${data[i].Calc.NoRisk.DrawBetAmount}</b> tokens on Draw
+                        `
+                    } else {
+                        var BetAmounts = `
+                        Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name}
+                        and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}
+                        `
+                    }
+                    var ProfitPerCard =  '$' + data[i].Calc.NoRisk.ProfitPerCard;
+                } else {
+                    var BetAmounts = "err";
+                    var ProfitPerCard = "err";
+                }
                 //TODO: Replace "undefined" Draw reward with a blank string
                 tr.innerHTML = `
                 <td>${data[i].Team1.Name}</td>
@@ -85,6 +124,8 @@
                 <td><a target="_blank" href=${data[i].PlayUrl}>${data[i].PlayUrl}</a></td>
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
+                <td>${BetAmounts}</td>
+                <td>${ProfitPerCard}</td>
                 `;
                 mainContainer.appendChild(tr);
             }
@@ -101,7 +142,11 @@
             ],
             responsive: true,
             // Order by the date column, ascending.
-            order: [[ 6, "asc" ]]
+            order: [[ 6, "asc" ]],
+            // Disallow sorting by bet amount column
+            "columnDefs": [
+                { "orderable": false, "targets": 8 }
+            ]
         });
     }
 </script>
