@@ -97,9 +97,10 @@
     <h1>Latest Gambit Plays</h1>
     <h4>Times are converted to your local timezone. Content is updated LIVE from the GambitProfit.com API.</h4>
     <hr>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Update on Gambit Rewards</h4>
-        As of 08/04/2020, Gambit tokens from Swagbucks are no longer discounted 33%. This means <b>no bets with a profit per card below $1.00 will be profitable.</b> As a result, "No risk" bets and bets with a profit lower than $1.00 are no longer displayed on this site.
+        Update 08/11/2020: Gambit tokens from Swagbucks are now discounted 12%. The math in the backend has been refactored, to take into account the new cost of Gambit cards. This change is reflected in the backend API as well.
+        <b>Please note that profit per card DOES take into account the 264 SB cost for 300 tokens. It is NOT based on the 200 SB cost.</b>
     </div>
     <table id="dataTable" class="table table-striped table-bordered">
         <thead>
@@ -171,7 +172,7 @@
         let mainContainer = document.getElementById("appendData");
         for (let i = 0; i < data.length; i++) {
             // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
-            if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true && data[i].Calc.Recommended != "NoRisk" && (data[i].Calc.Recommended == "MedRisk" ? (data[i].Calc.MedRisk.ProfitPerCard > 1.00) : (data[i].Calc.HighRisk.ProfitPerCard > 1.00))) {
+            if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
                 let tr = document.createElement("tr");
                 // Logic to generate the bet amounts and stuff based on the recommended play
                 if (data[i].Calc.Recommended == "HighRisk") {
