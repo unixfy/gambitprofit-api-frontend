@@ -179,14 +179,14 @@
                     var BetAmounts = `
                     Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}
                     `
-                    var ProfitPerCard = '$' + data[i].Calc.HighRisk.ProfitPerCard;
+                    var ProfitPerCard = data[i].Calc.HighRisk.ProfitPerCard + '%';
                 } else if (data[i].Calc.Recommended == "MedRisk" ) {
                     var BetAmounts = `
                     Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn}
                     and
                     <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}
                     `
-                    var ProfitPerCard =  '$' + data[i].Calc.MedRisk.ProfitPerCard;
+                    var ProfitPerCard =  data[i].Calc.MedRisk.ProfitPerCard + '%';
                 } else if (data[i].Calc.Recommended == "NoRisk") {
                     // Need more logic to display different strings depending if there is a draw condition
                     if (data[i].Calc.NoRisk.DrawBetAmount) {
@@ -201,7 +201,7 @@
                         and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}
                         `
                     }
-                    var ProfitPerCard =  '$' + data[i].Calc.NoRisk.ProfitPerCard;
+                    var ProfitPerCard =  data[i].Calc.NoRisk.ProfitPerCard + '%';
                 } else {
                     var BetAmounts = "err";
                     var ProfitPerCard = "err";
