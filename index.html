@@ -221,34 +221,34 @@
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts}</td>
-                <!-- Calculates approx profit in SB  - Change 264 here if cost of card changes -->
-                <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
-                <td><a target="_blank" href=${data[i].PlayUrl} data-export="test">${data[i].PlayUrl}</a></td>
+                <!-- Calculates approx profit in SB  - Change 264 here if cost of card changes --> <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
+                <td data-export="test"><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>
                 `;
                 mainContainer.appendChild(tr);
             }
         }
         console.log('End of data loading function');
     }
+
+
+    // DataTables init function
     function initDataTables(){
         $('#dataTable').DataTable( {
             dom: "Bfrtipl",
             buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
                 'colvis'
             ],
             responsive: true,
             // Order by the date column, ascending, by default.
             order: [[ 8, "desc" ]],
-            // Disallow sorting by bet amount column
             "columnDefs": [
+                // Disallow sorting by bet amount column
                 { "orderable": false, "targets": 7 }
             ],
             fixedHeader: true
         });
     }
+
     // Preloader clearer
     function clearLoader(){
         $( ".loader" ).fadeOut(500, function() {
