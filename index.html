@@ -216,7 +216,7 @@
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts}</td>
-                <td>${ProfitPerCard}</td>
+                <td>${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
                 <td><a target="_blank" href=${data[i].PlayUrl} data-export="test">${data[i].PlayUrl}</a></td>
                 `;
                 mainContainer.appendChild(tr);
