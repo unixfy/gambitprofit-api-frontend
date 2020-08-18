@@ -222,7 +222,7 @@
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts}</td>
                 <!-- Calculates approx profit in SB  - Change 264 here if cost of card changes -->
-                <td>${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
+                <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
                 <td><a target="_blank" href=${data[i].PlayUrl} data-export="test">${data[i].PlayUrl}</a></td>
                 `;
                 mainContainer.appendChild(tr);
