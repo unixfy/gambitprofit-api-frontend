@@ -102,6 +102,24 @@
         Update 08/11/2020: Gambit tokens from Swagbucks are now discounted 12%. The math in the backend has been refactored, to take into account the new cost of Gambit cards. This change is reflected in the backend API as well.
         <b>Please note that profit per card DOES take into account the 264 SB cost for 300 tokens. It is NOT based on the 200 SB cost.</b>
     </div>
+    <div class="card">
+        <h2 class="card-header">Settings</h2>
+        <div class="card-body">
+            <!-- Configuration settings - need to set return false on forms to prevent breaking fetch() -->
+            <form onsubmit="return false">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Bet amount (tokens)</span>
+                    </div>
+                    <input type="number" class="form-control" id="tokenAmount" aria-describedby="tokenAmountHelp" placeholder="Enter # of tokens">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
     <table id="dataTable" class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -152,24 +170,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <script>
-    // We fetch only the 100 most recent results in the API
-    fetch('https://api-dev.gambitprofit.com/gambit-plays?_limit=100&_sort=createdAt:DESC')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // Fill out all the data, then intitalize datatables
-            appendData(data);
-            console.log('Data successfully loaded from API! Initializing Datatables.');
-            initDataTables();
-            console.log('Clearing preloader');
-            clearLoader();
-        })
-        .catch(function (err) {
-            alert('An error occurred! ' + err);
-        });
+    // Reload data when submit button is clicked
+    document.getElementById("tokenSubmitBtn").addEventListener("click", reloadData);
+
+    // Pull data on page load
+    window.onload = function() {
+        // Set default token value to 300
+        document.getElementById("tokenAmount").defaultValue = 300;
+
+        fetch('https://api-dev.gambitprofit.com/gambit-plays/tokens/' + document.getElementById('tokenAmount').value + '/?_limit=100&_sort=createdAt:DESC')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+                console.log('Data successfully loaded.');
+                initDataTables();
+                clearLoader();
+            })
+            .catch(function (err) {
+                alert('An error occurred! ' + err);
+            });
+    }
+
+    // Function to grab data - ONLY use for button clicks
+    function reloadData() {
+        showLoader();
+        fetch('https://api-dev.gambitprofit.com/gambit-plays/tokens/' + document.getElementById('tokenAmount').value + '/?_limit=100&_sort=createdAt:DESC')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+                console.log('Data successfully reloaded.');
+                clearLoader();
+            })
+            .catch(function (err) {
+                alert('An error occurred! ' + err);
+            });
+    }
+
+    // Function to add data from fetch() to DataTables
     function appendData(data) {
         let mainContainer = document.getElementById("appendData");
+        // Clear data first
+        mainContainer.innerHTML = "";
         for (let i = 0; i < data.length; i++) {
             // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
             if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
@@ -224,6 +269,8 @@
         }
         console.log('End of data loading function');
     }
+
+    // Initialize DataTables - must only be run once or will throw an error
     function initDataTables(){
         $('#dataTable').DataTable( {
             dom: "Bfrtipl",
@@ -243,11 +290,17 @@
             fixedHeader: true
         });
     }
+
     // Preloader clearer
     function clearLoader(){
         $( ".loader" ).fadeOut(500, function() {
-            $( ".loader" ).remove();
+            $( ".loader" ).hide();
         });
+    }
+
+    // Preloader shower
+    function showLoader(){
+        $( ".loader" ).show();
     }
 </script>
 </body>

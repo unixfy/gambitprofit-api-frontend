@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GambitProfit.com API Frontend</title>
-    <!-- Bootstrap, iFrameResizer, DataTables assets -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/fh-3.1.7/r-2.2.5/datatables.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.11/iframeResizer.contentWindow.min.js"></script>
-    <!-- Preloader styles -->
     <style>
         .loader {
             position: fixed;
@@ -95,7 +93,6 @@
         <div class="sk-chase-dot"></div>
     </div>
 </div>
-<!-- Begin content -->
 <div class="container-fluid">
     <h1>Latest Gambit Plays</h1>
     <h4>Times are converted to your local timezone. Content is updated LIVE from the GambitProfit.com API.</h4>
@@ -105,7 +102,24 @@
         Update 08/11/2020: Gambit tokens from Swagbucks are now discounted 12%. The math in the backend has been refactored, to take into account the new cost of Gambit cards. This change is reflected in the backend API as well.
         <b>Please note that profit per card DOES take into account the 264 SB cost for 300 tokens. It is NOT based on the 200 SB cost.</b>
     </div>
-    <!-- Plays DataTable -->
+    <div class="card">
+        <h2 class="card-header">Settings</h2>
+        <div class="card-body">
+            <!-- Configuration settings - need to set return false on forms to prevent breaking fetch() -->
+            <form onsubmit="return false">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Bet amount (tokens)</span>
+                    </div>
+                    <input type="number" class="form-control" id="tokenAmount" aria-describedby="tokenAmountHelp" placeholder="Enter # of tokens">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
     <table id="dataTable" class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -136,7 +150,6 @@
             <th>
                 Profit per Card
             </th>
-            <!-- TODO: Figure out a way to squish these links so they don't take up a huge amount of screenspace -->
             <th>
                 Link
             </th>
@@ -156,24 +169,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <script>
-    // We fetch only the 100 most recent results in the API, to reduce lag
-    fetch('https://api.gambitprofit.com/gambit-plays?_limit=100&_sort=createdAt:DESC')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // Fill out all the data, then initialize DataTables
-            appendData(data);
-            console.log('Data successfully loaded from API! Initializing Datatables.');
-            initDataTables();
-            console.log('Clearing preloader');
-            clearLoader();
-        })
-        .catch(function (err) {
-            alert('An error occurred! ' + err);
-        });
+    // Reload data when submit button is clicked
+    document.getElementById("tokenSubmitBtn").addEventListener("click", reloadData);
+
+    // Pull data on page load
+    window.onload = function() {
+        // Set default token value to 300
+        document.getElementById("tokenAmount").defaultValue = 300;
+        reloadData();
+    }
+
+    // Function to grab data - ONLY use for button clicks
+    function reloadData() {
+        showLoader();
+        destroyDataTables();
+        fetch('https://api.gambitprofit.com/gambit-plays/tokens/' + document.getElementById('tokenAmount').value + '/?_limit=100&_sort=createdAt:DESC')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+                console.log('Data successfully reloaded.');
+                initDataTables();
+                clearLoader();
+            })
+            .catch(function (err) {
+                alert('An error occurred! ' + err);
+            });
+    }
+
+    // Function to add data from fetch() to DataTables
     function appendData(data) {
         let mainContainer = document.getElementById("appendData");
+        // Clear data first
+        mainContainer.innerHTML = "";
         for (let i = 0; i < data.length; i++) {
             // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
             if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
@@ -211,7 +240,8 @@
                     var ProfitPerCard = "err";
                 }
                 //TODO: Replace "undefined" Draw reward with a blank string
-                // Generated data for each play
+
+                // Be sure to change the multiplier in ProfitPerCard column if SB discount changes
                 tr.innerHTML = `
                 <td>${data[i].Team1.Name}</td>
                 <td>${data[i].Team1.Reward}</td>
@@ -220,40 +250,50 @@
                 <td>${data[i].Draw.Reward}</td>
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
-                <td>${BetAmounts}</td>
-                <!-- Calculates approx profit in SB  - Change 264 here if cost of card changes --> <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * 264).toFixed(2)} SB</td>
-                <td data-export="test"><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>
-                `;
+                <td>${BetAmounts} </td>
+                <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * 0.88))).toFixed(2)} SB</td>
+                <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>                `;
                 mainContainer.appendChild(tr);
             }
         }
         console.log('End of data loading function');
     }
 
-
-    // DataTables init function
+    // Initialize DataTables
     function initDataTables(){
         $('#dataTable').DataTable( {
             dom: "Bfrtipl",
             buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
                 'colvis'
             ],
             responsive: true,
-            // Order by the date column, ascending, by default.
+            // Order by the date column, ascending.
             order: [[ 8, "desc" ]],
+            // Disallow sorting by bet amount column
             "columnDefs": [
-                // Disallow sorting by bet amount column
                 { "orderable": false, "targets": 7 }
             ],
             fixedHeader: true
         });
     }
 
+    // Destroy DataTables
+    function destroyDataTables() {
+        $('#dataTable').DataTable().destroy();
+    }
     // Preloader clearer
     function clearLoader(){
         $( ".loader" ).fadeOut(500, function() {
-            $( ".loader" ).remove();
+            $( ".loader" ).hide();
         });
+    }
+
+    // Preloader shower
+    function showLoader(){
+        $( ".loader" ).show();
     }
 </script>
 </body>
