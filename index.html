@@ -200,6 +200,9 @@
     // Function to add data from fetch() to DataTables
     function appendData(data) {
         let mainContainer = document.getElementById("appendData");
+
+        // Edit this if SB discount changes. Needs to be in decimal format
+        let gambitDiscountPercent = 0.12;
         // Clear data first
         mainContainer.innerHTML = "";
         for (let i = 0; i < data.length; i++) {
@@ -240,7 +243,6 @@
                 }
                 //TODO: Replace "undefined" Draw reward with a blank string
 
-                // Be sure to change the multiplier in ProfitPerCard column if SB discount changes
                 tr.innerHTML = `
                 <td>${data[i].Team1.Name}</td>
                 <td>${data[i].Team1.Reward}</td>
@@ -250,7 +252,7 @@
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>${data[i].Calc.Recommended}</td>
                 <td>${BetAmounts} </td>
-                <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * 0.88))).toFixed(2)} SB</td>
+                <td data-order="${ProfitPerCard}">${ProfitPerCard} ≈ ${((parseFloat(ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2)} SB</td>
                 <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>                `;
                 mainContainer.appendChild(tr);
             }
