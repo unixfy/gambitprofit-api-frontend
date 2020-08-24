@@ -102,9 +102,10 @@ function initDataTables(){
         order: [[ 8, "desc" ]],
         // Disallow sorting by bet amount column
         "columnDefs": [
-            { "orderable": false, "targets": 7 }
+            { "orderable": false, "targets": 7 },
         ],
-        fixedHeader: true
+        fixedHeader: true,
+        autoWidth: true
     });
 }
 
