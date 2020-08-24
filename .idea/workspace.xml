@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/devel.html" beforeDir="false" afterPath="$PROJECT_DIR$/devel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +37,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -30,11 +50,84 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598213752646</updated>
-      <workItem from="1598213753793" duration="3685000" />
+      <workItem from="1598213753793" duration="4362000" />
+      <workItem from="1598218268048" duration="71000" />
+      <workItem from="1598221473655" duration="138000" />
+      <workItem from="1598278494011" duration="422000" />
     </task>
+    <task id="LOCAL-00001" summary="Add WebStorm configs">
+      <created>1598217618640</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598217618640</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update to add custom token amounts">
+      <created>1598217630094</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598217630094</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Reorder JS to prevent jquery error with Bootstrap">
+      <created>1598217772680</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1598217772680</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add data validation (minimum 50 tokens) and move reload event listener to form instead of button (to allow data validation)">
+      <created>1598217977032</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598217977032</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Isolate gambit discount percentage variable">
+      <created>1598218134017</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1598218134017</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Remove 300 tokens from bet amounts">
+      <created>1598218326601</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1598218326601</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add WebStorm configs" />
+    <MESSAGE value="Update to add custom token amounts" />
+    <MESSAGE value="Reorder JS to prevent jquery error with Bootstrap" />
+    <MESSAGE value="Add data validation (minimum 50 tokens) and move reload event listener to form instead of button (to allow data validation)" />
+    <MESSAGE value="Isolate gambit discount percentage variable" />
+    <MESSAGE value="Remove 300 tokens from bet amounts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove 300 tokens from bet amounts" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1598218328596">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1598218328596" />
   </component>
 </project>
