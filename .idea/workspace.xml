@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -53,7 +51,7 @@
       <workItem from="1598213753793" duration="4362000" />
       <workItem from="1598218268048" duration="71000" />
       <workItem from="1598221473655" duration="138000" />
-      <workItem from="1598278494011" duration="422000" />
+      <workItem from="1598278494011" duration="490000" />
     </task>
     <task id="LOCAL-00001" summary="Add WebStorm configs">
       <created>1598217618640</created>
@@ -97,7 +95,21 @@
       <option name="project" value="LOCAL" />
       <updated>1598218326601</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add maximum to tokens field to prevent abuse">
+      <created>1598278937087</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1598278937087</updated>
+    </task>
+    <task id="LOCAL-00008" summary="jetbrains stuff">
+      <created>1598278944554</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1598278944554</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,12 +134,18 @@
     <MESSAGE value="Add data validation (minimum 50 tokens) and move reload event listener to form instead of button (to allow data validation)" />
     <MESSAGE value="Isolate gambit discount percentage variable" />
     <MESSAGE value="Remove 300 tokens from bet amounts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove 300 tokens from bet amounts" />
+    <MESSAGE value="Add maximum to tokens field to prevent abuse" />
+    <MESSAGE value="jetbrains stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="jetbrains stuff" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1598218328596">
+    <state x="240" y="77" key="SettingsEditor" timestamp="1598278987723">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1598218328596" />
+    <state x="240" y="77" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1598278987723" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1598278945856">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1598278945856" />
   </component>
 </project>
