@@ -124,14 +124,20 @@ function appendData(data) {
                       <select style="width: auto;" class="form-control" id="${"betMethodSelector" + i}">
                             ${betMethodSelectorOptions}
                       </select>
-                </td>
-                <td>Empty</td>
-                <td>Empty</td>
-                <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>     
+                </td> 
                 `;
 
             // Add all the data that was just generated to the HTML content of the page
             mainContainer.appendChild(tr);
+
+            // We have to split the tr definition in two pieces, to allow the bet method to be selected before populating the bet amounts/profit per card
+            // Need to run the betmethodswitcher function to initially populate the data
+            let switcherData = betMethodSwitcher(data, i);
+            tr.innerHTML +=`
+                <td>${switcherData["BetAmounts"]}</td>
+                <td data-order="${switcherData["ProfitPerCardRaw"]}">${switcherData["ProfitPerCard"]}</td>
+                <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>    
+            `
 
             // Listener to update table when bet method dropdown is switched
             $(document.body).on("change", "#betMethodSelector" + i, function(){
