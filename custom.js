@@ -104,9 +104,7 @@ function appendData(data) {
                  betMethodSelectorOptions += "<option>HighRisk</option>"
             }
 
-            if(data[i].Calc.MedRisk.Recommended == true && data[i].Calc.NoRisk.Recommended == false) {
-                betMethodSelectorOptions += "<option selected>MedRisk</option>"
-            } else if (data[i].Calc.MedRisk.Recommended == true){
+            if(data[i].Calc.MedRisk.Recommended == true) {
                 betMethodSelectorOptions += "<option>MedRisk</option>"
             }
 
