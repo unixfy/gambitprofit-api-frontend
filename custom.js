@@ -140,7 +140,7 @@ function appendData(data) {
             `
 
             // Listener to update table when bet method dropdown is switched
-            $(document.body).on("change", "#betMethodSelector" + i, function(){
+            $(document.body).on("click", "#betMethodSelector" + i, function(){
                 // The function will return an array containing the BetAmounts and ProfitPerCard values.
                 let switcherData = betMethodSwitcher(data, i);
                 // Update bet amounts column of row that contains the dropdown which was updated
