@@ -20,6 +20,7 @@ function betMethodSwitcher(data, i) {
                     Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}
                     `
         var ProfitPerCard = data[i].Calc.HighRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCardRaw = data[i].Calc.HighRisk.ProfitPerCard;
     } else if ($("#betMethodSelector" + i + " option:selected").text() == "MedRisk" ) {
         var BetAmounts = `
                     Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn}
@@ -27,6 +28,7 @@ function betMethodSwitcher(data, i) {
                     <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}
                     `
         var ProfitPerCard = data[i].Calc.MedRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCardRaw = data[i].Calc.MedRisk.ProfitPerCard;
     } else if ($("#betMethodSelector" + i + " option:selected").text() == "NoRisk") {
         // Need more logic to display different strings depending if there is a draw condition
         if (data[i].Calc.NoRisk.DrawBetAmount) {
@@ -42,15 +44,18 @@ function betMethodSwitcher(data, i) {
                         `
         }
         var ProfitPerCard = data[i].Calc.NoRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCardRaw = data[i].Calc.NoRisk.ProfitPerCard;
     } else {
         var BetAmounts = "err";
         var ProfitPerCard = "err";
+        var ProfitPerCardRaw = null;
     }
 
     // Returns data in an array
     return {
         "BetAmounts": BetAmounts,
-        "ProfitPerCard": ProfitPerCard
+        "ProfitPerCard": ProfitPerCard,
+        "ProfitPerCardRaw": ProfitPerCardRaw
     };
 }
 
@@ -93,6 +98,20 @@ function appendData(data) {
             let tr = document.createElement("tr");
             //TODO: Replace "undefined" Draw reward with a blank string
 
+            // Determine which bet method options should be shown in the selector
+            let betMethodSelectorOptions;
+            if(data[i].Calc.HighRisk.Recommended == true) {
+                 betMethodSelectorOptions += "<option>HighRisk</option>"
+            }
+            if(data[i].Calc.MedRisk.Recommended == true && data[i].Calc.NoRisk.Recommended == false) {
+                betMethodSelectorOptions += "<option selected>MedRisk</option>"
+            } else if (data[i].Calc.MedRisk.Recommended == true){
+                betMethodSelectorOptions += "<option>MedRisk</option>"
+            }
+            else if(data[i].Calc.NoRisk.Recommended == true) {
+                betMethodSelectorOptions += "<option selected>NoRisk</option>"
+            }
+
             // The BetAmounts / ProfitPerCard are always going to be empty, because they will be filled later with a separate function
             tr.innerHTML = `
                 <td>${data[i].Team1.Name}</td>
@@ -103,9 +122,7 @@ function appendData(data) {
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>
                       <select style="width: auto;" class="form-control" id="${"betMethodSelector" + i}">
-                            <option selected>NoRisk</option>
-                            <option>MedRisk</option>
-                            <option>HighRisk</option>
+                            ${betMethodSelectorOptions}
                       </select>
                 </td>
                 <td>Empty</td>
@@ -124,6 +141,8 @@ function appendData(data) {
                 $('#dataTable').DataTable().cell($(this).closest('tr'), 7).data(switcherData["BetAmounts"]);
                 // Update profit per card column of row that contains the dropdown which was updated
                 $('#dataTable').DataTable().cell($(this).closest('tr'), 8).data(switcherData["ProfitPerCard"]);
+                // Adapt the PPC cell's ordering attribute to be the raw profit per card
+                $(this).closest('td')['data-order'] = switcherData["ProfitPerCardRaw"];
             });
         }
     }
