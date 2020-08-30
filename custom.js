@@ -100,6 +100,11 @@ function appendData(data) {
 
             // Determine which bet method options should be shown in the selector
             let betMethodSelectorOptions;
+
+            if(data[i].Calc.NoRisk.Recommended == true) {
+                betMethodSelectorOptions += "<option>NoRisk</option>"
+            }
+
             if(data[i].Calc.HighRisk.Recommended == true) {
                  betMethodSelectorOptions += "<option>HighRisk</option>"
             }
@@ -108,17 +113,9 @@ function appendData(data) {
                 betMethodSelectorOptions += "<option>MedRisk</option>"
             }
 
-            if(data[i].Calc.NoRisk.Recommended == true) {
-                betMethodSelectorOptions += "<option selected>NoRisk</option>"
-            }
-
             // The BetAmounts / ProfitPerCard are always going to be empty, because they will be filled later with a separate function
             tr.innerHTML = `
-                <td>${data[i].Team1.Name}</td>
-                <td>${data[i].Team1.Reward}</td>
-                <td>${data[i].Team2.Name}</td>
-                <td>${data[i].Team2.Reward}</td>
-                <td>${data[i].Draw.Reward}</td>
+                <td><b>${data[i].Team1.Name}</b> (${data[i].Team1.Reward}) v. <b>${data[i].Team2.Name}</b> (${data[i].Team2.Reward}) ${data[i].Draw.Reward ? "v. <b>Draw</b> (" + data[i].Draw.Reward + ")" : ""}</td>
                 <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
                 <td>
                       <select style="width: auto;" class="form-control" id="${"betMethodSelector" + i}">
@@ -135,12 +132,12 @@ function appendData(data) {
             let switcherData = betMethodSwitcher(data, i);
             tr.innerHTML +=`
                 <td>${switcherData["BetAmounts"]}</td>
-                <td data-order="${switcherData["ProfitPerCardRaw"]}">${switcherData["ProfitPerCard"]}</td>
+                <td data-order="${switcherData["ProfitPerCardRaw"]}" class="ProfitPerCard">${switcherData["ProfitPerCard"]}</td>
                 <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>    
             `
 
             // Listener to update table when bet method dropdown is switched
-            $(document).on("click","#betMethodSelector"+i,function(){
+            $(document).on("change","#betMethodSelector"+i,function(){
                 // We use this to look at child rows if they exist (i.e. when Responsive is working)
                 var node = $(this).closest('li').length ?
                     $(this).closest('li') :
@@ -148,11 +145,12 @@ function appendData(data) {
                 // The function will return an array containing the BetAmounts and ProfitPerCard values.
                 let switcherData = betMethodSwitcher(data, i);
                 // Update bet amounts column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell(node, 7).data(switcherData["BetAmounts"]);
+                $('#dataTable').DataTable().cell(node, 3).data(switcherData["BetAmounts"]).draw(false);
                 // Update profit per card column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell(node, 8).data(switcherData["ProfitPerCard"]);
+                $('#dataTable').DataTable().cell(node, 4).data(switcherData["ProfitPerCard"]).draw(false);
                 // Adapt the PPC cell's ordering attribute to be the raw profit per card
-                $(this).closest('td')['data-order'] = switcherData["ProfitPerCardRaw"];
+                $(this).closest(node).find(".ProfitPerCard").attr('data-order', switcherData["ProfitPerCardRaw"]);
+                $('#dataTable').DataTable().cell(node, 4).invalidate();
             });
         }
     }
@@ -168,10 +166,10 @@ function initDataTables(){
         ],
         responsive: true,
         // Order by the Profit per card column, descending
-        order: [[ 8, "desc" ]],
+        order: [[ 4, "desc" ]],
         // Disallow sorting by bet amount & bet method columns
         "columnDefs": [
-            { "orderable": false, "targets": [6, 7] }
+            { "orderable": false, "targets": [2, 3] }
         ],
         fixedHeader: true,
         autoWidth: true
