@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GambitProfit.com API Frontend</title>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/b-colvis-1.6.3/fh-3.1.7/r-2.2.5/datatables.min.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
@@ -50,7 +47,7 @@
         <div class="card-body">
             <!-- Configuration settings - need to set return false on forms to prevent breaking fetch() -->
             <form id="tokenAmountForm" onsubmit="return false">
-                <div class="input-group">
+                <div class="input-group py-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Bet amount (tokens)</span>
                     </div>
@@ -59,6 +56,13 @@
                     <div class="input-group-append">
                         <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
                     </div>
+                </div>
+                <div class="input-group py-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Search</span>
+                    </div>
+                    <input type="text" class="form-control" id="searchBar"
+                           placeholder="Enter query">
                 </div>
             </form>
         </div>
@@ -73,9 +77,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>
-<!-- DataTables JS -->
-<script type="text/javascript"
-        src="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/b-colvis-1.6.3/fh-3.1.7/r-2.2.5/datatables.min.js"></script>
 <!-- Popper (Bootstrap dependency) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
         integrity="sha512-hCP3piYGSBPqnXypdKxKPSOzBHF75oU8wQ81a6OiGXHFMeKs9/8ChbgYl7pUvwImXJb03N4bs1o1DzmbokeeFw=="
