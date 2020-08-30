@@ -140,13 +140,17 @@ function appendData(data) {
             `
 
             // Listener to update table when bet method dropdown is switched
-            $(document.body).on("click", "#betMethodSelector" + i, function(){
+            $(document).on("click","#betMethodSelector"+i,function(){
+                // We use this to look at child rows if they exist (i.e. when Responsive is working)
+                var node = $(this).closest('li').length ?
+                    $(this).closest('li') :
+                    $(this).closest('tr');
                 // The function will return an array containing the BetAmounts and ProfitPerCard values.
                 let switcherData = betMethodSwitcher(data, i);
                 // Update bet amounts column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell($(this).closest('tr'), 7).data(switcherData["BetAmounts"]);
+                $('#dataTable').DataTable().cell(node, 7).data(switcherData["BetAmounts"]);
                 // Update profit per card column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell($(this).closest('tr'), 8).data(switcherData["ProfitPerCard"]);
+                $('#dataTable').DataTable().cell(node, 8).data(switcherData["ProfitPerCard"]);
                 // Adapt the PPC cell's ordering attribute to be the raw profit per card
                 $(this).closest('td')['data-order'] = switcherData["ProfitPerCardRaw"];
             });
@@ -167,7 +171,7 @@ function initDataTables(){
         order: [[ 8, "desc" ]],
         // Disallow sorting by bet amount & bet method columns
         "columnDefs": [
-            { "orderable": false, "targets": [6, 7] },
+            { "orderable": false, "targets": [6, 7] }
         ],
         fixedHeader: true,
         autoWidth: true
