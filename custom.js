@@ -133,7 +133,7 @@ function appendData(data) {
             tr.innerHTML +=`
                 <td>${switcherData["BetAmounts"]}</td>
                 <td data-order="${switcherData["ProfitPerCardRaw"]}" class="ProfitPerCard">${switcherData["ProfitPerCard"]}</td>
-                <td><a target="_blank" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>    
+                <td><a target="_blank" rel="noreferrer" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>    
             `
 
             // Listener to update table when bet method dropdown is switched
