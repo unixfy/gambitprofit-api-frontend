@@ -12,6 +12,22 @@ window.onload = function () {
     reloadData();
 }
 
+// ListJS options
+var options = {
+    // These values are assigned by adding a class, see https://listjs.com/docs/
+    valueNames: [ 'Team1-Name',
+        'Team2-Name',
+        'Team1-Reward',
+        'Team2-Reward',
+        'Draw-Name', // Always equals "Draw"
+        'Draw-Reward',
+        'NoRisk-ProfitPerCard',
+        'MedRisk-ProfitPerCard',
+        'HighRisk-ProfitPerCard',
+        'Date'
+    ]
+};
+
 // Function to grab data from API
 function reloadData() {
     // Show preloader
@@ -28,6 +44,14 @@ function reloadData() {
 
             // Hide the preloader
             clearLoader();
+
+            // Init ListJS
+            var playList = new List('container', options);
+
+            // Immediately sort by profitpercard, desc
+            playList.sort("NoRisk-ProfitPerCard", {
+                order: "desc"
+            });
         })
         .catch(function (err) {
             alert('An error occurred! ' + err);
@@ -44,6 +68,7 @@ function appendData(data) {
         // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
         if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
             let card = document.createElement("div");
+            // Add column sizing and margin classes
             card.className = "col-md-3 mb-3";
             // Determine which bet method options should be output
             if (data[i].Calc.NoRisk.Recommended === true && data[i].Calc.NoRisk.DrawBetAmount) {
@@ -73,17 +98,17 @@ function appendData(data) {
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">
-                    ${data[i].Team1.Name} <small>${data[i].Team1.Reward}</small> 
-                    <br>${data[i].Team2.Name} <small>${data[i].Team2.Reward}</small>
-                    ${data[i].Draw.Reward ? "<br>Draw <small>" + data[i].Draw.Reward + "</small>" : ""}
+                    <span class="Team1-Name">${data[i].Team1.Name}</span> <small><span class="Team1-Reward">${data[i].Team1.Reward}</span></small> 
+                    <br><span class="Team2-Name">${data[i].Team2.Name}</span> <small><span class="Team2-Reward">${data[i].Team2.Reward}</span></small>
+                    ${data[i].Draw.Reward ? "<br><span class='Draw-Name'>Draw</span> <small><span class='Draw-Reward'>" + data[i].Draw.Reward + "</span></small>" : ""}
                     </h5>
-                    <h6 class="card-subtitle mb-3 text-muted">${moment(data[i].PlayDate).calendar()}</h6>
+                    <h6 class="card-subtitle mb-3 text-muted"><span class="Date">${moment(data[i].PlayDate).calendar()}</span></h6>
                     
                     <p class="card-text">
                 ${noRiskWithDraw === true ?
                 `
                     <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name}, <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}, and <b>${data[i].Calc.NoRisk.DrawBetAmount}</b> tokens on Draw.
-                    <span class="badge badge-pill badge-success">${data[i].Calc.NoRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -91,7 +116,7 @@ function appendData(data) {
                 ${noRisk === true ?
                 `
                     <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name} and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}.
-                    <span class="badge badge-pill badge-success">${data[i].Calc.NoRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -99,7 +124,7 @@ function appendData(data) {
                 ${medRisk === true ?
                 `
                     <span class="text-warning">Med Risk: </span>Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn} and <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}.
-                    <span class="badge badge-pill badge-warning">${data[i].Calc.MedRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-warning">${'<span class="MedRisk-ProfitPerCard">' + data[i].Calc.MedRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -107,7 +132,7 @@ function appendData(data) {
                 ${highRisk === true ?
                 `
                     <span class="text-danger">High Risk: </span>Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}. 
-                    <span class="badge badge-pill badge-danger">${data[i].Calc.HighRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-danger">${'<span class="HighRisk-ProfitPerCard">' + data[i].Calc.HighRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                 `
                 : ""}

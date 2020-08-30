@@ -30,7 +30,7 @@
         <div class="sk-chase-dot"></div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" id="container">
     <h1>Latest Gambit Plays</h1>
     <h4>Times are converted to your local timezone. Content is updated LIVE from the GambitProfit.com API.</h4>
     <hr>
@@ -57,18 +57,18 @@
                         <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
                     </div>
                 </div>
-                <div class="input-group py-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Search</span>
-                    </div>
-                    <input type="text" class="form-control" id="searchBar"
-                           placeholder="Enter query">
-                </div>
             </form>
+            <div class="input-group py-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Search</span>
+                </div>
+                <input type="text" class="form-control search" id="searchBar"
+                       placeholder="Enter query" onkeypress="return event.keyCode !== 13;" autocomplete="off">
+            </div>
         </div>
     </div>
     <br>
-    <div class="row" id="appendData">
+    <div class="list row" id="appendData">
 
     </div>
 </div>
