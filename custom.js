@@ -5,7 +5,7 @@ let gambitDiscountPercent = 0.12;
 document.getElementById("tokenAmountForm").addEventListener("submit", reloadData);
 
 // Pull data on page load
-window.onload = function() {
+window.onload = function () {
     // Set default token value to 300
     document.getElementById("tokenAmount").defaultValue = 300;
     // Reload the data from API
@@ -19,15 +19,15 @@ function betMethodSwitcher(data, i) {
         var BetAmounts = `
                     Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}
                     `
-        var ProfitPerCard = data[i].Calc.HighRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCard = data[i].Calc.HighRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
         var ProfitPerCardRaw = data[i].Calc.HighRisk.ProfitPerCard;
-    } else if ($("#betMethodSelector" + i + " option:selected").text() == "MedRisk" ) {
+    } else if ($("#betMethodSelector" + i + " option:selected").text() == "MedRisk") {
         var BetAmounts = `
                     Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn}
                     and
                     <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}
                     `
-        var ProfitPerCard = data[i].Calc.MedRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCard = data[i].Calc.MedRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
         var ProfitPerCardRaw = data[i].Calc.MedRisk.ProfitPerCard;
     } else if ($("#betMethodSelector" + i + " option:selected").text() == "NoRisk") {
         // Need more logic to display different strings depending if there is a draw condition
@@ -43,7 +43,7 @@ function betMethodSwitcher(data, i) {
                         and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}
                         `
         }
-        var ProfitPerCard = data[i].Calc.NoRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
+        var ProfitPerCard = data[i].Calc.NoRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
         var ProfitPerCardRaw = data[i].Calc.NoRisk.ProfitPerCard;
     } else {
         var BetAmounts = "err";
@@ -95,81 +95,100 @@ function appendData(data) {
     for (let i = 0; i < data.length; i++) {
         // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
         if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
-            let tr = document.createElement("tr");
-            //TODO: Replace "undefined" Draw reward with a blank string
-
-            // Determine which bet method options should be shown in the selector
-            let betMethodSelectorOptions;
-
-            if(data[i].Calc.NoRisk.Recommended == true) {
-                betMethodSelectorOptions += "<option>NoRisk</option>"
+            let card = document.createElement("div");
+            card.className = "col-md-3 mb-3";
+            // Determine which bet method options should be output
+            if (data[i].Calc.NoRisk.Recommended === true && data[i].Calc.NoRisk.DrawBetAmount) {
+                var noRiskWithDraw = true;
+            } else if (data[i].Calc.NoRisk.Recommended === true) {
+                var noRisk = true;
+            } else {
+                var noRisk = false;
+                var noRiskWithDraw = false;
             }
 
-            if(data[i].Calc.HighRisk.Recommended == true) {
-                 betMethodSelectorOptions += "<option>HighRisk</option>"
+            if (data[i].Calc.HighRisk.Recommended === true) {
+                var highRisk = true;
+                console.log("highRisk" + data[i].Team1.Name);
+            } else {
+                var highRisk = false;
             }
 
-            if(data[i].Calc.MedRisk.Recommended == true) {
-                betMethodSelectorOptions += "<option>MedRisk</option>"
+            if (data[i].Calc.MedRisk.Recommended === true) {
+                var medRisk = true;
+            } else {
+                var medRisk = false;
             }
 
             // The BetAmounts / ProfitPerCard are always going to be empty, because they will be filled later with a separate function
-            tr.innerHTML = `
-                <td><b>${data[i].Team1.Name}</b> (${data[i].Team1.Reward}) v. <b>${data[i].Team2.Name}</b> (${data[i].Team2.Reward}) ${data[i].Draw.Reward ? "v. <b>Draw</b> (" + data[i].Draw.Reward + ")" : ""}</td>
-                <td data-order="${data[i].PlayDate}">${moment(data[i].PlayDate).calendar()}</td>
-                <td>
-                      <select style="width: auto;" class="form-control" id="${"betMethodSelector" + i}">
-                            ${betMethodSelectorOptions}
-                      </select>
-                </td> 
-                `;
+            card.innerHTML = `
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                    ${data[i].Team1.Name} <small>${data[i].Team1.Reward}</small> 
+                    <br>${data[i].Team2.Name} <small>${data[i].Team2.Reward}</small>
+                    ${data[i].Draw.Reward ? "<br>Draw <small>" + data[i].Draw.Reward + "</small>" : ""}
+                    </h5>
+                    <h6 class="card-subtitle mb-3 text-muted">${moment(data[i].PlayDate).calendar()}</h6>
+                    
+                    <p class="card-text">
+                ${noRiskWithDraw === true ?
+                `
+                    <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name}, <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}, and <b>${data[i].Calc.NoRisk.DrawBetAmount}</b> tokens on Draw.
+                    <span class="badge badge-pill badge-success">${data[i].Calc.NoRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <hr>
+                    `
+                : ""}
+                    
+                ${noRisk === true ?
+                `
+                    <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name} and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}.
+                    <span class="badge badge-pill badge-success">${data[i].Calc.NoRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <hr>
+                    `
+                : ""}
+                    
+                ${medRisk === true ?
+                `
+                    <span class="text-warning">Med Risk: </span>Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn} and <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}.
+                    <span class="badge badge-pill badge-warning">${data[i].Calc.MedRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <hr>
+                    `
+                : ""}
+                
+                ${highRisk === true ?
+                `
+                    <span class="text-danger">High Risk: </span>Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}. 
+                    <span class="badge badge-pill badge-danger">${data[i].Calc.HighRisk.ProfitPerCard + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <hr>
+                `
+                : ""}
+                    </p>
+                    <a href="${data[i].PlayUrl}" class="card-link mt-auto" target="_blank" rel="noreferrer">Open on GambitRewards.com</a>
+                </div>
+            </div>
+            `;
 
             // Add all the data that was just generated to the HTML content of the page
-            mainContainer.appendChild(tr);
-
-            // We have to split the tr definition in two pieces, to allow the bet method to be selected before populating the bet amounts/profit per card
-            // Need to run the betmethodswitcher function to initially populate the data
-            let switcherData = betMethodSwitcher(data, i);
-            tr.innerHTML +=`
-                <td>${switcherData["BetAmounts"]}</td>
-                <td data-order="${switcherData["ProfitPerCardRaw"]}" class="ProfitPerCard">${switcherData["ProfitPerCard"]}</td>
-                <td><a target="_blank" rel="noreferrer" class="btn btn-primary btn-block" href=${data[i].PlayUrl}>Go</a></td>    
-            `
-
-            // Listener to update table when bet method dropdown is switched
-            $(document).on("change","#betMethodSelector"+i,function(){
-                // We use this to look at child rows if they exist (i.e. when Responsive is working)
-                var node = $(this).closest('li').length ?
-                    $(this).closest('li') :
-                    $(this).closest('tr');
-                // The function will return an array containing the BetAmounts and ProfitPerCard values.
-                let switcherData = betMethodSwitcher(data, i);
-                // Update bet amounts column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell(node, 3).data(switcherData["BetAmounts"]).draw(false);
-                // Update profit per card column of row that contains the dropdown which was updated
-                $('#dataTable').DataTable().cell(node, 4).data(switcherData["ProfitPerCard"]).draw(false);
-                // Adapt the PPC cell's ordering attribute to be the raw profit per card
-                $(this).closest(node).find(".ProfitPerCard").attr('data-order', switcherData["ProfitPerCardRaw"]);
-                $('#dataTable').DataTable().cell(node, 4).invalidate();
-            });
+            mainContainer.appendChild(card);
         }
     }
     console.log('End of data loading function');
 }
 
 // Function to initialize DataTables
-function initDataTables(){
-    $('#dataTable').DataTable( {
+function initDataTables() {
+    $('#dataTable').DataTable({
         dom: "Bfrtipl",
         buttons: [
             'colvis'
         ],
         responsive: true,
         // Order by the Profit per card column, descending
-        order: [[ 4, "desc" ]],
+        order: [[4, "desc"]],
         // Disallow sorting by bet amount & bet method columns
         "columnDefs": [
-            { "orderable": false, "targets": [2, 3] }
+            {"orderable": false, "targets": [2, 3]}
         ],
         fixedHeader: true,
         autoWidth: true
@@ -182,13 +201,13 @@ function destroyDataTables() {
 }
 
 // Preloader clearer
-function clearLoader(){
-    $( ".loader" ).fadeOut(500, function() {
-        $( ".loader" ).hide();
+function clearLoader() {
+    $(".loader").fadeOut(500, function () {
+        $(".loader").hide();
     });
 }
 
 // Preloader shower
-function showLoader(){
-    $( ".loader" ).show();
+function showLoader() {
+    $(".loader").show();
 }
