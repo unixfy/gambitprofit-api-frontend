@@ -16,8 +16,6 @@ window.onload = function () {
 function reloadData() {
     // Show preloader
     showLoader();
-    // Remove datatables, will be reinitialized later
-    destroyDataTables();
     // Fetch data from API
     fetch('https://hfj9ocdja8.execute-api.eu-west-1.amazonaws.com/gambit-plays/tokens/' + document.getElementById('tokenAmount').value + '/?_limit=100&_sort=createdAt:DESC')
         .then(function (response) {
@@ -27,9 +25,6 @@ function reloadData() {
             // Create HTML table
             appendData(data);
             console.log('Data successfully reloaded.');
-
-            // Initialize DataTables
-            initDataTables();
 
             // Hide the preloader
             clearLoader();
@@ -127,30 +122,6 @@ function appendData(data) {
         }
     }
     console.log('End of data loading function');
-}
-
-// Function to initialize DataTables
-function initDataTables() {
-    $('#dataTable').DataTable({
-        dom: "Bfrtipl",
-        buttons: [
-            'colvis'
-        ],
-        responsive: true,
-        // Order by the Profit per card column, descending
-        order: [[4, "desc"]],
-        // Disallow sorting by bet amount & bet method columns
-        "columnDefs": [
-            {"orderable": false, "targets": [2, 3]}
-        ],
-        fixedHeader: true,
-        autoWidth: true
-    });
-}
-
-// Function to destroy DataTables
-function destroyDataTables() {
-    $('#dataTable').DataTable().destroy();
 }
 
 // Preloader clearer
