@@ -12,53 +12,6 @@ window.onload = function () {
     reloadData();
 }
 
-// Function to generate Bet Amounts, Profit per Card column - returns data to a function to update table
-function betMethodSwitcher(data, i) {
-    // Logic to generate the bet amounts and stuff based on the recommended play
-    if ($("#betMethodSelector" + i + " option:selected").text() == "HighRisk") {
-        var BetAmounts = `
-                    Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}
-                    `
-        var ProfitPerCard = data[i].Calc.HighRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
-        var ProfitPerCardRaw = data[i].Calc.HighRisk.ProfitPerCard;
-    } else if ($("#betMethodSelector" + i + " option:selected").text() == "MedRisk") {
-        var BetAmounts = `
-                    Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn}
-                    and
-                    <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}
-                    `
-        var ProfitPerCard = data[i].Calc.MedRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
-        var ProfitPerCardRaw = data[i].Calc.MedRisk.ProfitPerCard;
-    } else if ($("#betMethodSelector" + i + " option:selected").text() == "NoRisk") {
-        // Need more logic to display different strings depending if there is a draw condition
-        if (data[i].Calc.NoRisk.DrawBetAmount) {
-            var BetAmounts = `
-                        Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name},
-                        <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name},
-                        and <b>${data[i].Calc.NoRisk.DrawBetAmount}</b> tokens on Draw
-                        `
-        } else {
-            var BetAmounts = `    
-                        Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name}
-                        and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}
-                        `
-        }
-        var ProfitPerCard = data[i].Calc.NoRisk.ProfitPerCard + '% ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB';
-        var ProfitPerCardRaw = data[i].Calc.NoRisk.ProfitPerCard;
-    } else {
-        var BetAmounts = "err";
-        var ProfitPerCard = "err";
-        var ProfitPerCardRaw = null;
-    }
-
-    // Returns data in an array
-    return {
-        "BetAmounts": BetAmounts,
-        "ProfitPerCard": ProfitPerCard,
-        "ProfitPerCardRaw": ProfitPerCardRaw
-    };
-}
-
 // Function to grab data from API
 function reloadData() {
     // Show preloader
