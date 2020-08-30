@@ -137,7 +137,7 @@ function appendData(data) {
                 `
                 : ""}
                     </p>
-                    <a href="${data[i].PlayUrl}" class="card-link mt-auto" target="_blank" rel="noreferrer">Open on GambitRewards.com</a>
+                    <a href="${data[i].PlayUrl}" class="card-link mt-auto" target="_blank" rel="noreferrer">Open on GambitRewards.com <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
             `;
