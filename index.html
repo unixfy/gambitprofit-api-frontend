@@ -15,7 +15,9 @@
             integrity="sha512-RMBWitJB1ymY4l6xeYsFwoEgVCAnOWX/zL1gNwXjlUj78nZ8SVbJsZxbH/w0p2jDNraHkOW8rzQgcJ0LNSXWBA=="
             crossorigin="anonymous"></script>
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="custom.css"/>
 
@@ -46,28 +48,65 @@
     </div>
     <div class="card border-secondary">
         <h3 class="card-header bg-secondary text-white">
-                <i class="fas fa-cog"></i> Settings
+            <i class="fas fa-cog"></i> Settings
         </h3>
         <div class="card-body collapse show" id="settings-collapse">
             <!-- Configuration settings - need to set return false on forms to prevent breaking fetch() -->
-            <form id="tokenAmountForm" onsubmit="return false">
-                <div class="input-group py-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-coins"></i> &nbsp; Bet amount (tokens)</span>
-                    </div>
-                    <input type="number" class="form-control" id="tokenAmount" aria-describedby="tokenAmountHelp"
-                           placeholder="Enter # of tokens" min="50" max="70000">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Token amount -->
+                    <form id="tokenAmountForm" onsubmit="return false">
+                        <div class="form-group">
+                            <label for="tokenAmount">Number of tokens you wish to bet</label>
+                            <div class="input-group py-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                </div>
+                                <input type="number" class="form-control" id="tokenAmount"
+                                       placeholder="Enter # of tokens" min="50" max="70000">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">tokens</span>
+                                    <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label for="searchBar">Search for bets by name, odds, or profit</label>
+                        <!-- Search -->
+                        <div class="input-group py-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i> &nbsp; Search</span>
+                            </div>
+                            <input type="text" class="form-control search" id="searchBar"
+                                   placeholder="Enter query" onkeypress="return event.keyCode !== 13;"
+                                   autocomplete="off">
+                        </div>
                     </div>
                 </div>
-            </form>
-            <div class="input-group py-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-search"></i> &nbsp; Search</span>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label for="searchBar">Change sorting</label>
+                        <!-- Sort -->
+                        <div class="input-group py-3">
+                            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Team1-Name">
+                                Team 1 Name
+                            </button>
+                            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Team2-Name">
+                                Team 2 Name
+                            </button>
+                            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Date">Date
+                            </button>
+                            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2"
+                                    data-sort="NoRisk-ProfitPerCard">Profit
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <input type="text" class="form-control search" id="searchBar"
-                       placeholder="Enter query" onkeypress="return event.keyCode !== 13;" autocomplete="off">
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ window.onload = function () {
 // ListJS options
 var options = {
     // These values are assigned by adding a class, see https://listjs.com/docs/
-    valueNames: [ 'Team1-Name',
+    valueNames: ['Team1-Name',
         'Team2-Name',
         'Team1-Reward',
         'Team2-Reward',
@@ -132,7 +132,7 @@ function appendData(data) {
                 ${highRisk === true ?
                 `
                     <span class="text-danger">High Risk: </span>Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}. 
-                    <span class="badge badge-pill badge-danger">${'<span class="HighRisk-ProfitPerCard">' + data[i].Calc.HighRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard)/100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-danger">${'<span class="HighRisk-ProfitPerCard">' + data[i].Calc.HighRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                 `
                 : ""}
