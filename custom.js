@@ -65,8 +65,8 @@ function appendData(data) {
     mainContainer.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
-        // We only want to display plays that haven't already started (i.e. past 1 hour before play-time) and that are profitable
-        if (moment(data[i].PlayDate).subtract(1, 'hours').diff() >= 0 && data[i].Calc.Profitable === true) {
+        // We only want to display plays that haven't already started (i.e. past 30 min before play-time) and that are profitable
+        if (moment(data[i].PlayDate).subtract(30, 'minutes').diff() > -1 && data[i].Calc.Profitable === true) {
             let card = document.createElement("div");
             // Add column sizing and margin classes
             card.className = "col-md-3 mb-3";
