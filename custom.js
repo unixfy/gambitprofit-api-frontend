@@ -95,7 +95,7 @@ function appendData(data) {
 
             // The BetAmounts / ProfitPerCard are always going to be empty, because they will be filled later with a separate function
             card.innerHTML = `
-            <div class="card h-100">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
                     <span class="Team1-Name">${data[i].Team1.Name}</span> <small><span class="Team1-Reward">${data[i].Team1.Reward}</span></small> 
