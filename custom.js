@@ -102,8 +102,7 @@ function appendData(data) {
                     <br><span class="Team2-Name">${data[i].Team2.Name}</span> <small><span class="Team2-Reward">${data[i].Team2.Reward}</span></small>
                     ${data[i].Draw.Reward ? "<br><span class='Draw-Name'>Draw</span> <small><span class='Draw-Reward'>" + data[i].Draw.Reward + "</span></small>" : ""}
                     </h5>
-                    <h6 class="card-subtitle mb-3 text-muted"><span class="Date">${moment(data[i].PlayDate).calendar()}</span></h6>
-                    
+                    <h6 class="card-subtitle mb-3 text-muted"><span class="Date">${moment(data[i].PlayDate).calendar()}</span></h6>                    
                     <p class="card-text">
                 ${noRiskWithDraw === true ?
                 `
@@ -137,8 +136,10 @@ function appendData(data) {
                 `
                 : ""}
                     </p>
+                    <span><small class="text-muted">Last updated ${moment(data[i].updatedAt).fromNow()}</small></span>
+                    <br>
                     <a href="${data[i].PlayUrl}" class="card-link mt-auto" target="_blank" rel="noreferrer">Open on GambitRewards.com <i class="fas fa-external-link-alt"></i></a>
-                </div>
+                  </div>
             </div>
             `;
 
