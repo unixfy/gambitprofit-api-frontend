@@ -147,6 +147,16 @@ function appendData(data) {
             mainContainer.appendChild(card);
         }
     }
+
+    // Show informational alert if the data doesn't exist
+    if (mainContainer.innerHTML === "") {
+        $("#container").append(`
+            <div class="alert alert-info" role="alert">
+                <b>No profitable Gambit plays are available at this time.</b>
+            </div>
+        `)
+    }
+
     console.log('End of data loading function');
 }
 
