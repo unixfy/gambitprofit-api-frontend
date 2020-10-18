@@ -6,14 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GambitProfit.com API Frontend</title>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/b-colvis-1.6.3/fh-3.1.7/r-2.2.5/datatables.min.css"/>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
+          crossorigin="anonymous"/>
     <!-- Iframeresizer -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.11/iframeResizer.contentWindow.js" integrity="sha512-RMBWitJB1ymY4l6xeYsFwoEgVCAnOWX/zL1gNwXjlUj78nZ8SVbJsZxbH/w0p2jDNraHkOW8rzQgcJ0LNSXWBA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.11/iframeResizer.contentWindow.js"
+            integrity="sha512-RMBWitJB1ymY4l6xeYsFwoEgVCAnOWX/zL1gNwXjlUj78nZ8SVbJsZxbH/w0p2jDNraHkOW8rzQgcJ0LNSXWBA=="
+            crossorigin="anonymous"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="custom.css" />
+    <link rel="stylesheet" type="text/css" href="custom.css"/>
 
 </head>
 <body>
@@ -28,73 +34,103 @@
         <div class="sk-chase-dot"></div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" id="container">
     <h1>Latest Gambit Plays</h1>
     <h4>Times are converted to your local timezone. Content is updated LIVE from the GambitProfit.com API.</h4>
     <hr>
-    <div class="alert alert-warning" role="alert">
+<!--    <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Update on Gambit Rewards</h4>
-        Update 08/11/2020: Gambit tokens from Swagbucks are now discounted 12%. The math in the backend has been refactored, to take into account the new cost of Gambit cards. This change is reflected in the backend API as well.
-        <b>Please note that profit per card DOES take into account the 264 SB cost for 300 tokens. It is NOT based on the 200 SB cost.</b>
-    </div>
-    <div class="card">
-        <h3 class="card-header">Settings</h3>
-        <div class="card-body">
+        Update 08/11/2020: Gambit tokens from Swagbucks are now discounted 12%. The math in the backend has been
+        refactored, to take into account the new cost of Gambit cards. This change is reflected in the backend API as
+        well.
+        <b>Please note that profit per card DOES take into account the 264 SB cost for 300 tokens. It is NOT based on
+            the 200 SB cost.</b>
+    </div>-->
+    <div class="card border-secondary">
+        <h3 class="card-header bg-secondary text-white">
+            <i class="fas fa-cog"></i> Settings
+        </h3>
+        <div class="card-body collapse show" id="settings-collapse">
             <!-- Configuration settings - need to set return false on forms to prevent breaking fetch() -->
-            <form id="tokenAmountForm" onsubmit="return false">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Bet amount (tokens)</span>
-                    </div>
-                    <input type="number" class="form-control" id="tokenAmount" aria-describedby="tokenAmountHelp" placeholder="Enter # of tokens" min="50" max="70000">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Token amount -->
+                    <form id="tokenAmountForm" onsubmit="return false">
+                        <div class="form-group">
+                            <label for="tokenAmount">Number of tokens you wish to bet</label>
+                            <div class="input-group py-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                </div>
+                                <input type="number" class="form-control" id="tokenAmount"
+                                       placeholder="Enter # of tokens" min="50" max="70000">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">tokens</span>
+                                    <button class="btn btn-primary" id="tokenSubmitBtn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <label for="searchBar">Search for bets by name, odds, or profit</label>
+                        <!-- Search -->
+                        <div class="input-group py-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i> &nbsp; Search</span>
+                            </div>
+                            <input type="text" class="form-control search" id="searchBar"
+                                   placeholder="Enter query" onkeypress="return event.keyCode !== 13;"
+                                   autocomplete="off">
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <br>
-    <table id="dataTable" class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>
-                Game Name
-            </th>
-            <th>
-                Play Time
-            </th>
-            <th>
-                Bet Method
-            </th>
-            <th width="20vw">
-                Bet Amounts
-            </th>
-            <th>
-                Profit per Card
-            </th>
-            <th>
-                Link
-            </th>
-        </tr>
-        </thead>
-        <!-- This is where all the generated data goes -->
-        <tbody id="appendData">
+    <div class="form-group">
+        <!-- Sort -->
+        <div class="input-group py-3">
+            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Team1-Name">
+                Team 1 Name
+            </button>
+            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Team2-Name">
+                Team 2 Name
+            </button>
+            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2" data-sort="Date">Date
+            </button>
+            <button type="button" class="btn btn-primary sort mr-2 mt-md-0 mt-2"
+                    data-sort="NoRisk-ProfitPerCard">Profit
+            </button>
+        </div>
+    </div>
+    <div class="list row" id="appendData">
 
-        </tbody>
-    </table>
+    </div>
 </div>
 
 <!-- JQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<!-- DataTables JS -->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/b-1.6.3/b-colvis-1.6.3/fh-3.1.7/r-2.2.5/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+<!-- listJS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"
+        integrity="sha512-AYlzeu/5Cexb6uN6uQ0LfoRx33CgMticI4+eEsmPz9QxxyuLr0zd4MA+4hxLqISNs8769A+FVnBCuaMne6d0+w=="
+        crossorigin="anonymous"></script>
 <!-- Popper (Bootstrap dependency) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" integrity="sha512-hCP3piYGSBPqnXypdKxKPSOzBHF75oU8wQ81a6OiGXHFMeKs9/8ChbgYl7pUvwImXJb03N4bs1o1DzmbokeeFw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+        integrity="sha512-hCP3piYGSBPqnXypdKxKPSOzBHF75oU8wQ81a6OiGXHFMeKs9/8ChbgYl7pUvwImXJb03N4bs1o1DzmbokeeFw=="
+        crossorigin="anonymous"></script>
 <!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
+        crossorigin="anonymous"></script>
 <!-- MomentJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+        integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+        crossorigin="anonymous"></script>
 <!-- Custom JS -->
 <script src="custom.js"></script>
 </body>
