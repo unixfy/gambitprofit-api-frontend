@@ -19,13 +19,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="" />
+    <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/custom.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1gVxqZ9xqUJn8sc7YJYxh8JpUBo" />
@@ -36,9 +44,10 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="discord-application" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -51,7 +60,28 @@
       <workItem from="1598213753793" duration="4362000" />
       <workItem from="1598218268048" duration="71000" />
       <workItem from="1598221473655" duration="138000" />
-      <workItem from="1598278494011" duration="490000" />
+      <workItem from="1598278494011" duration="561000" />
+      <workItem from="1598285878495" duration="2216000" />
+      <workItem from="1598291066180" duration="197000" />
+      <workItem from="1598316459722" duration="6000" />
+      <workItem from="1598717265455" duration="14056000" />
+      <workItem from="1598734064899" duration="1134000" />
+      <workItem from="1598735227426" duration="2553000" />
+      <workItem from="1598740936673" duration="11378000" />
+      <workItem from="1598803152488" duration="708000" />
+      <workItem from="1598804036718" duration="85000" />
+      <workItem from="1598815550893" duration="8390000" />
+      <workItem from="1598838947673" duration="1309000" />
+      <workItem from="1598883097430" duration="2940000" />
+      <workItem from="1598919211541" duration="228000" />
+      <workItem from="1599268219052" duration="766000" />
+      <workItem from="1599444174269" duration="675000" />
+      <workItem from="1599747897784" duration="12000" />
+      <workItem from="1600021278255" duration="807000" />
+      <workItem from="1600214850996" duration="163000" />
+      <workItem from="1600274549809" duration="5000" />
+      <workItem from="1601475188954" duration="945000" />
+      <workItem from="1601911678890" duration="528000" />
     </task>
     <task id="LOCAL-00001" summary="Add WebStorm configs">
       <created>1598217618640</created>
@@ -109,7 +139,273 @@
       <option name="project" value="LOCAL" />
       <updated>1598278944554</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="More Jetbrains stuff">
+      <created>1598279010990</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1598279010990</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Clean up datatables dependencies, we had a lot of unused JS">
+      <created>1598286409061</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1598286409061</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Change all deps to be from Cloudflare CDNJS and add SRI validation">
+      <created>1598286530431</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1598286530431</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Clean up JS and CSS assets">
+      <created>1598286764160</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1598286764160</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Externalize CSS to enable compression by Netlify">
+      <created>1598286837001</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1598286837001</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Externalize JS">
+      <created>1598286922549</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1598286922549</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fix Bet Amounts custom width">
+      <created>1598288108087</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1598288108087</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fix iframeresizer, need to use contentwindow.js">
+      <created>1598291168106</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1598291168106</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add rudimentary switcher for bet methods">
+      <created>1598726842381</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1598726842381</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Clean up JS for readability's sake">
+      <created>1598727296717</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1598727296717</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fix data ordering when switching bet method; automatically generate available bet methods in the dropdown">
+      <created>1598730176220</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1598730176220</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Switch from api.gambitprofit (old API) to new API-gateway based API">
+      <created>1598730216748</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1598730216749</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add display of default bet method">
+      <created>1598731900455</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1598731900455</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fix else if for showing NoRisk">
+      <created>1598732494365</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1598732494366</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Clean up formatting of the big if statement group">
+      <created>1598732526850</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1598732526850</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Remove unnecessary if statement for if MedRisk is recommended and NoRisk is not">
+      <created>1598732719005</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1598732719005</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Move event listener to click instead of change.. maybe it will start working on mobiles">
+      <created>1598741182068</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1598741182069</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed">
+      <created>1598751236454</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1598751236454</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Various UX changes (condensing first few columns etc)">
+      <created>1598803235899</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1598803235899</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Patch vulnerability with links to gambit">
+      <created>1598803856880</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1598803856880</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Transition everything to cards (instead of table). Wow! Looks great">
+      <created>1598818894586</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1598818894587</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Remove betmethodswitcher function as it's unused">
+      <created>1598819776016</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1598819776016</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Remove datatables deps">
+      <created>1598820091235</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1598820091235</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add listJS">
+      <created>1598820127007</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1598820127007</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Remove more Datatables stuff">
+      <created>1598820184934</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1598820184934</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Implement ListJS sorting, filtering">
+      <created>1598826382852</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1598826382852</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Add Fontawesome CSS">
+      <created>1598826495939</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1598826495939</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Add some font awesome icons">
+      <created>1598826665033</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1598826665033</updated>
+    </task>
+    <task id="LOCAL-00037" summary="UX change on settings box">
+      <created>1598839380493</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1598839380494</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Add informational icons to settings">
+      <created>1598844688024</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1598844688024</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Add sorting buttons, additional appearance fixes for settings">
+      <created>1598885655500</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1598885655500</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Remove alert at top">
+      <created>1598885673470</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1598885673470</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Move sort option down to reduce screen usage">
+      <created>1598886057250</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1598886057250</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Bets will now be hidden 30 min before their play time, rather than 1 hour">
+      <created>1598919432535</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1598919432535</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add last updated time to each card">
+      <created>1599268578132</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268578132</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Remove h-100 from cards because it looks weird">
+      <created>1599268961818</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1599268961818</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Remove devel.html because I never use it">
+      <created>1600214894859</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1600214894859</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Add a super hacky &quot;no plays available&quot; message">
+      <created>1601476094391</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1601476094391</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,24 +424,57 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add WebStorm configs" />
-    <MESSAGE value="Update to add custom token amounts" />
-    <MESSAGE value="Reorder JS to prevent jquery error with Bootstrap" />
-    <MESSAGE value="Add data validation (minimum 50 tokens) and move reload event listener to form instead of button (to allow data validation)" />
-    <MESSAGE value="Isolate gambit discount percentage variable" />
-    <MESSAGE value="Remove 300 tokens from bet amounts" />
-    <MESSAGE value="Add maximum to tokens field to prevent abuse" />
-    <MESSAGE value="jetbrains stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="jetbrains stuff" />
+    <MESSAGE value="Fix else if for showing NoRisk" />
+    <MESSAGE value="Clean up formatting of the big if statement group" />
+    <MESSAGE value="Remove unnecessary if statement for if MedRisk is recommended and NoRisk is not" />
+    <MESSAGE value="Move event listener to click instead of change.. maybe it will start working on mobiles" />
+    <MESSAGE value="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed" />
+    <MESSAGE value="Various UX changes (condensing first few columns etc)" />
+    <MESSAGE value="Patch vulnerability with links to gambit" />
+    <MESSAGE value="Transition everything to cards (instead of table). Wow! Looks great" />
+    <MESSAGE value="Remove betmethodswitcher function as it's unused" />
+    <MESSAGE value="Remove datatables deps" />
+    <MESSAGE value="Add listJS" />
+    <MESSAGE value="Remove more Datatables stuff" />
+    <MESSAGE value="Implement ListJS sorting, filtering" />
+    <MESSAGE value="Add Fontawesome CSS" />
+    <MESSAGE value="Add some font awesome icons" />
+    <MESSAGE value="UX change on settings box" />
+    <MESSAGE value="Add informational icons to settings" />
+    <MESSAGE value="Add sorting buttons, additional appearance fixes for settings" />
+    <MESSAGE value="Remove alert at top" />
+    <MESSAGE value="Move sort option down to reduce screen usage" />
+    <MESSAGE value="Bets will now be hidden 30 min before their play time, rather than 1 hour" />
+    <MESSAGE value="Add last updated time to each card" />
+    <MESSAGE value="Remove h-100 from cards because it looks weird" />
+    <MESSAGE value="Remove devel.html because I never use it" />
+    <MESSAGE value="Add a super hacky &quot;no plays available&quot; message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a super hacky &quot;no plays available&quot; message" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="240" y="77" key="SettingsEditor" timestamp="1598278987723">
+    <state x="186" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598741106778">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="240" y="77" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1598278987723" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1598278945856">
+    <state x="186" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1462.864@0.0.1462.864" timestamp="1598741106778" />
+    <state x="478" y="287" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1598883239232">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1598278945856" />
+    <state x="478" y="287" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1462.864@0.0.1462.864" timestamp="1598883239232" />
+    <state x="240" y="77" key="SettingsEditor" timestamp="1598746017334">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="240" y="77" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1598746017334" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1601476131658">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1601476131658" />
+    <state x="337" y="42" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601476032978">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="337" y="42" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1462.864@0.0.1462.864" timestamp="1601476032978" />
+    <state x="394" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1598825111967">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="394" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1462.864@0.0.1462.864" timestamp="1598825111967" />
   </component>
 </project>
