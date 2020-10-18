@@ -6,8 +6,8 @@ document.getElementById("tokenAmountForm").addEventListener("submit", reloadData
 
 // Pull data on page load
 window.onload = function () {
-    // Set default token value to 300
-    document.getElementById("tokenAmount").defaultValue = 300;
+    // Set default token value to 1000
+    document.getElementById("tokenAmount").defaultValue = 1000;
     // Reload the data from API
     reloadData();
 }
