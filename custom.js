@@ -6,8 +6,10 @@ document.getElementById("tokenAmountForm").addEventListener("submit", reloadData
 
 // Pull data on page load
 window.onload = function () {
-    // Set default token value to 1000
-    document.getElementById("tokenAmount").defaultValue = 1000;
+    // Set the value of the token field to data loaded from localstorage
+    // If the localstorage item isn't present or is null, we will just use 1000 to prevent breakage
+    document.getElementById("tokenAmount").defaultValue = localStorage.getItem("tokenAmount") || 1000;
+
     // Reload the data from API
     reloadData();
 }
@@ -32,8 +34,13 @@ var options = {
 function reloadData() {
     // Show preloader
     showLoader();
+
+    // Store the current token amount (from the form) into localStorage
+    // If the field is blank, just set 1000 so nothing breaks
+    localStorage.setItem("tokenAmount", document.getElementById('tokenAmount').value || 1000)
+
     // Fetch data from API
-    fetch('https://hfj9ocdja8.execute-api.eu-west-1.amazonaws.com/gambit-plays/tokens/' + document.getElementById('tokenAmount').value + '/?_limit=100&_sort=createdAt:DESC')
+    fetch('https://hfj9ocdja8.execute-api.eu-west-1.amazonaws.com/gambit-plays/tokens/' + localStorage.getItem("tokenAmount") + '/?_limit=100&_sort=createdAt:DESC')
         .then(function (response) {
             return response.json();
         })
@@ -107,7 +114,7 @@ function appendData(data) {
                 ${noRiskWithDraw === true ?
                 `
                     <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name}, <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}, and <b>${data[i].Calc.NoRisk.DrawBetAmount}</b> tokens on Draw.
-                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(localStorage.getItem("tokenAmount") * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -115,7 +122,7 @@ function appendData(data) {
                 ${noRisk === true ?
                 `
                     <span class="text-success">No Risk: </span>Bet <b>${data[i].Calc.NoRisk.Team1BetAmount}</b> tokens on ${data[i].Team1.Name} and <b>${data[i].Calc.NoRisk.Team2BetAmount}</b> tokens on ${data[i].Team2.Name}.
-                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-success">${'<span class="NoRisk-ProfitPerCard">' + data[i].Calc.NoRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.NoRisk.ProfitPerCard) / 100) * (parseFloat(localStorage.getItem("tokenAmount") * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -123,7 +130,7 @@ function appendData(data) {
                 ${medRisk === true ?
                 `
                     <span class="text-warning">Med Risk: </span>Bet <b>${data[i].Calc.MedRisk.Team1BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team1ToBetOn} and <b>${data[i].Calc.MedRisk.Team2BetAmount}</b> tokens on ${data[i].Calc.MedRisk.Team2ToBetOn}.
-                    <span class="badge badge-pill badge-warning">${'<span class="MedRisk-ProfitPerCard">' + data[i].Calc.MedRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-warning">${'<span class="MedRisk-ProfitPerCard">' + data[i].Calc.MedRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.MedRisk.ProfitPerCard) / 100) * (parseFloat(localStorage.getItem("tokenAmount") * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                     `
                 : ""}
@@ -131,7 +138,7 @@ function appendData(data) {
                 ${highRisk === true ?
                 `
                     <span class="text-danger">High Risk: </span>Bet <b>${data[i].Calc.HighRisk.BetAmount}</b> tokens on ${data[i].Calc.HighRisk.TeamToBetOn}. 
-                    <span class="badge badge-pill badge-danger">${'<span class="HighRisk-ProfitPerCard">' + data[i].Calc.HighRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard) / 100) * (parseFloat(document.getElementById("tokenAmount").value * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
+                    <span class="badge badge-pill badge-danger">${'<span class="HighRisk-ProfitPerCard">' + data[i].Calc.HighRisk.ProfitPerCard + '</span>' + '% profit ≈ ' + ((parseFloat(data[i].Calc.HighRisk.ProfitPerCard) / 100) * (parseFloat(localStorage.getItem("tokenAmount") * (1 - gambitDiscountPercent)))).toFixed(2) + ' SB'}</span>
                     <hr>
                 `
                 : ""}
