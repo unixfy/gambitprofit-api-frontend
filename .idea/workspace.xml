@@ -16,12 +16,17 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/custom.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="cards-dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,34 +87,8 @@
       <workItem from="1600274549809" duration="5000" />
       <workItem from="1601475188954" duration="945000" />
       <workItem from="1601911678890" duration="528000" />
-    </task>
-    <task id="LOCAL-00001" summary="Add WebStorm configs">
-      <created>1598217618640</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1598217618640</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Update to add custom token amounts">
-      <created>1598217630094</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1598217630094</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Reorder JS to prevent jquery error with Bootstrap">
-      <created>1598217772680</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1598217772680</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add data validation (minimum 50 tokens) and move reload event listener to form instead of button (to allow data validation)">
-      <created>1598217977032</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1598217977032</updated>
+      <workItem from="1603056428204" duration="4396000" />
+      <workItem from="1603119512519" duration="1094000" />
     </task>
     <task id="LOCAL-00005" summary="Isolate gambit discount percentage variable">
       <created>1598218134017</created>
@@ -405,7 +384,56 @@
       <option name="project" value="LOCAL" />
       <updated>1601476094391</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Some minor fix that I don't remember?">
+      <created>1603056658221</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1603056658221</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Jetbrains stuff">
+      <created>1603056722012</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1603056722012</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Move default token amount to 1k">
+      <created>1603057110175</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1603057110175</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Add localstorage persistence for token amount">
+      <created>1603061512945</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1603061512946</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Some little semantics/organization changes for the sake of readability">
+      <created>1603119634505</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1603119634506</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Clean up comments">
+      <created>1603119895497</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1603119895497</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Add alert to reflect change from 12% -&gt; 10%">
+      <created>1603119952403</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1603119952403</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,7 +444,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -424,13 +464,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix else if for showing NoRisk" />
-    <MESSAGE value="Clean up formatting of the big if statement group" />
-    <MESSAGE value="Remove unnecessary if statement for if MedRisk is recommended and NoRisk is not" />
-    <MESSAGE value="Move event listener to click instead of change.. maybe it will start working on mobiles" />
-    <MESSAGE value="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed" />
-    <MESSAGE value="Various UX changes (condensing first few columns etc)" />
-    <MESSAGE value="Patch vulnerability with links to gambit" />
     <MESSAGE value="Transition everything to cards (instead of table). Wow! Looks great" />
     <MESSAGE value="Remove betmethodswitcher function as it's unused" />
     <MESSAGE value="Remove datatables deps" />
@@ -449,7 +482,14 @@
     <MESSAGE value="Remove h-100 from cards because it looks weird" />
     <MESSAGE value="Remove devel.html because I never use it" />
     <MESSAGE value="Add a super hacky &quot;no plays available&quot; message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a super hacky &quot;no plays available&quot; message" />
+    <MESSAGE value="Some minor fix that I don't remember?" />
+    <MESSAGE value="Jetbrains stuff" />
+    <MESSAGE value="Move default token amount to 1k" />
+    <MESSAGE value="Add localstorage persistence for token amount" />
+    <MESSAGE value="Some little semantics/organization changes for the sake of readability" />
+    <MESSAGE value="Clean up comments" />
+    <MESSAGE value="Add alert to reflect change from 12% -&gt; 10%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add alert to reflect change from 12% -&gt; 10%" />
   </component>
   <component name="WindowStateProjectService">
     <state x="186" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598741106778">
@@ -464,14 +504,18 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="240" y="77" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1598746017334" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1601476131658">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603119637739">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1601476131658" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1603119637739" />
     <state x="337" y="42" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601476032978">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="337" y="42" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1462.864@0.0.1462.864" timestamp="1601476032978" />
+    <state x="570" y="150" key="git4idea.branch.GitBranchIsNotFullyMergedDialog" timestamp="1603056746576">
+      <screen x="0" y="0" width="1462" height="864" />
+    </state>
+    <state x="570" y="150" key="git4idea.branch.GitBranchIsNotFullyMergedDialog/0.0.1462.864@0.0.1462.864" timestamp="1603056746576" />
     <state x="394" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1598825111967">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
