@@ -7,12 +7,14 @@ let gambitDiscountPercent = 0.12;
 // Reload data when the submit button on the token changer box is clicked
 document.getElementById("tokenAmountForm").addEventListener("submit", reloadData);
 
+// Reload data when the "show all" checkbox is clicked
+document.getElementById("showAllCheck").addEventListener("click", reloadData)
+
 // Immediately pull data on page load
 window.onload = function () {
     // Set the value of the token field to data loaded from localstorage (so the visitor is not confused)
     // If the localstorage item isn't present or is null, we will just use 1000 to prevent breakage
     document.getElementById("tokenAmount").defaultValue = localStorage.getItem("tokenAmount") || 1000;
-
     // Reload the data from API
     reloadData();
 }
@@ -32,6 +34,11 @@ var options = {
         'Date'
     ]
 };
+
+
+// Init ListJS
+var playList = new List('container', options);
+
 
 // Function to grab data from GambitProfit API
 function reloadData() {
@@ -53,16 +60,15 @@ function reloadData() {
             appendData(data);
             console.log('Data successfully reloaded.');
 
-            // Hide the preloader
-            clearLoader();
-
-            // Init ListJS
-            var playList = new List('container', options);
+            playList.reIndex();
 
             // Immediately sort by ProfitPerCard, descending
             playList.sort("NoRisk-ProfitPerCard", {
                 order: "desc"
             });
+
+            // Hide the preloader
+            clearLoader();
         })
         .catch(function (err) {
             alert('An error occurred! ' + err);
@@ -76,8 +82,12 @@ function appendData(data) {
     mainContainer.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
+        // IF the "Show all" box is not ticked:
         // We only want to display plays that haven't already started (i.e. past 30 min before play-time) and that are profitable
-        if (moment(data[i].PlayDate).subtract(30, 'minutes').diff() > -1 && data[i].Calc.Profitable === true) {
+        // Otherwise:
+        // We want to display all plays that haven't already started.
+
+        if ((document.getElementById("showAllCheck").checked ? moment(data[i].PlayDate).diff() > -1 : moment(data[i].PlayDate).subtract(30, 'minutes').diff() > -1 && data[i].Calc.Profitable === true)) {
             let card = document.createElement("div");
             // Add column sizing and margin classes
             card.className = "col-md-3 mb-3";
@@ -89,6 +99,15 @@ function appendData(data) {
             } else {
                 var noRisk = false;
                 var noRiskWithDraw = false;
+            }
+
+            // Just show all norisk if the "show all" box is checked - as long as values aren't null
+            if (document.getElementById("showAllCheck").checked) {
+                if (data[i].Calc.NoRisk.DrawBetAmount) {
+                    var noRiskWithDraw = true;
+                } else {
+                    var noRisk = true;
+                }
             }
 
             if (data[i].Calc.HighRisk.Recommended === true) {
@@ -170,7 +189,6 @@ function appendData(data) {
         </div>
         `)
     }
-
     console.log('End of data loading function');
 }
 
