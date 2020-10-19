@@ -4,12 +4,12 @@ let gambitDiscountPercent = 0.12;
 ////////////// END CONFIGURATION //////////////
 
 
-// Reload data when submit button is clicked
+// Reload data when the submit button on the token changer box is clicked
 document.getElementById("tokenAmountForm").addEventListener("submit", reloadData);
 
-// Pull data on page load
+// Immediately pull data on page load
 window.onload = function () {
-    // Set the value of the token field to data loaded from localstorage
+    // Set the value of the token field to data loaded from localstorage (so the visitor is not confused)
     // If the localstorage item isn't present or is null, we will just use 1000 to prevent breakage
     document.getElementById("tokenAmount").defaultValue = localStorage.getItem("tokenAmount") || 1000;
 
@@ -33,13 +33,14 @@ var options = {
     ]
 };
 
-// Function to grab data from API
+// Function to grab data from GambitProfit API
 function reloadData() {
     // Show preloader
     showLoader();
 
     // Store the current token amount (from the form) into localStorage
     // If the field is blank, just set 1000 so nothing breaks
+    // This ensures the localStorage (and therefore the data loaded) is always in sync with the tokenn amount changer box
     localStorage.setItem("tokenAmount", document.getElementById('tokenAmount').value || 1000)
 
     // Fetch data from API
@@ -58,7 +59,7 @@ function reloadData() {
             // Init ListJS
             var playList = new List('container', options);
 
-            // Immediately sort by profitpercard, desc
+            // Immediately sort by ProfitPerCard, descending
             playList.sort("NoRisk-ProfitPerCard", {
                 order: "desc"
             });
@@ -68,10 +69,10 @@ function reloadData() {
         });
 }
 
-// Function to add data from fetch() to DataTables
+// Function to add data from fetch() to the HTML DOM
 function appendData(data) {
     let mainContainer = document.getElementById("appendData");
-    // Clear data first
+    // Clear all content first so we don't end up with duplicates
     mainContainer.innerHTML = "";
 
     for (let i = 0; i < data.length; i++) {
@@ -153,12 +154,13 @@ function appendData(data) {
             </div>
             `;
 
-            // Add all the data that was just generated to the HTML content of the page
+            // Add all the data that was just generated to the HTML DOM of the page
             mainContainer.appendChild(card);
         }
     }
 
-    // Show informational alert if the data doesn't exist
+    // Show informational alert if the there aren't any plays which meet the criteria
+    // This is a super hacky way to check if there are no plays.. but it works I guess :')
     if (mainContainer.innerHTML === "") {
         $("#container").append(`
             <div class="alert alert-info" role="alert">
