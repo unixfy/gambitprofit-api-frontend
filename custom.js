@@ -162,10 +162,12 @@ function appendData(data) {
     // Show informational alert if the there aren't any plays which meet the criteria
     // This is a super hacky way to check if there are no plays.. but it works I guess :')
     if (mainContainer.innerHTML === "") {
-        $("#container").append(`
-            <div class="alert alert-info" role="alert">
-                <b>No profitable Gambit plays are available at this time.</b>
-            </div>
+        $("#appendData").append(`
+        <div class="container-fluid col-12">        
+        <div class="alert alert-danger col-12" role="alert">
+            <b>No profitable Gambit plays are available at this time.</b>
+        </div>
+        </div>
         `)
     }
 
