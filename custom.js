@@ -91,36 +91,43 @@ function appendData(data) {
             let card = document.createElement("div");
             // Add column sizing and margin classes
             card.className = "col-md-3 mb-3";
+
+            var noRiskWithDraw = false;
+            var noRisk = false;
+            var medRisk = false;
+            var highRisk = false;
+
             // Determine which bet method options should be output
-            if (data[i].Calc.NoRisk.Recommended === true && data[i].Calc.NoRisk.DrawBetAmount) {
-                var noRiskWithDraw = true;
-            } else if (noRiskWithDraw = null || false && data[i].Calc.NoRisk.Recommended === true) {
-                var noRisk = true;
+            if (data[i].Calc.NoRisk.Recommended === true) {
+                if (data[i].Calc.NoRisk.DrawBetAmount) {
+                    noRiskWithDraw = true;
+                } else {
+                    noRisk = true;
+                }
             } else {
-                var noRisk = false;
-                var noRiskWithDraw = false;
+                noRisk = false;
+                noRiskWithDraw = false;
             }
 
             // Just show all norisk if the "show all" box is checked - as long as values aren't null
             if (document.getElementById("showAllCheck").checked) {
                 if (data[i].Calc.NoRisk.DrawBetAmount) {
-                    var noRiskWithDraw = true;
+                    noRiskWithDraw = true;
                 } else {
-                    var noRisk = true;
+                    noRisk = true;
                 }
             }
 
             if (data[i].Calc.HighRisk.Recommended === true) {
-                var highRisk = true;
-                console.log("highRisk" + data[i].Team1.Name);
+                highRisk = true;
             } else {
-                var highRisk = false;
+                highRisk = false;
             }
 
             if (data[i].Calc.MedRisk.Recommended === true) {
-                var medRisk = true;
+                medRisk = true;
             } else {
-                var medRisk = false;
+                medRisk = false;
             }
 
             // The BetAmounts / ProfitPerCard are always going to be empty, because they will be filled later with a separate function
