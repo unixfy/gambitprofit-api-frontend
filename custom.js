@@ -94,7 +94,7 @@ function appendData(data) {
             // Determine which bet method options should be output
             if (data[i].Calc.NoRisk.Recommended === true && data[i].Calc.NoRisk.DrawBetAmount) {
                 var noRiskWithDraw = true;
-            } else if (data[i].Calc.NoRisk.Recommended === true) {
+            } else if (noRiskWithDraw = null || false && data[i].Calc.NoRisk.Recommended === true) {
                 var noRisk = true;
             } else {
                 var noRisk = false;
