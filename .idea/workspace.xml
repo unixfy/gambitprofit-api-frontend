@@ -27,6 +27,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6202b6f-52f8-4a0a-926c-61aef608399d" name="Default Changelist" comment="Pretty much failed attempt to try to get editing of cells working when bet amounts/PPC are collapsed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +51,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -88,56 +90,17 @@
       <workItem from="1601475188954" duration="945000" />
       <workItem from="1601911678890" duration="528000" />
       <workItem from="1603056428204" duration="4396000" />
-      <workItem from="1603119512519" duration="1094000" />
-    </task>
-    <task id="LOCAL-00005" summary="Isolate gambit discount percentage variable">
-      <created>1598218134017</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1598218134017</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Remove 300 tokens from bet amounts">
-      <created>1598218326601</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1598218326601</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Add maximum to tokens field to prevent abuse">
-      <created>1598278937087</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1598278937087</updated>
-    </task>
-    <task id="LOCAL-00008" summary="jetbrains stuff">
-      <created>1598278944554</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1598278944554</updated>
-    </task>
-    <task id="LOCAL-00009" summary="More Jetbrains stuff">
-      <created>1598279010990</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1598279010990</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Clean up datatables dependencies, we had a lot of unused JS">
-      <created>1598286409061</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1598286409061</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Change all deps to be from Cloudflare CDNJS and add SRI validation">
-      <created>1598286530431</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1598286530431</updated>
+      <workItem from="1603119512519" duration="1717000" />
+      <workItem from="1603122307937" duration="456000" />
+      <workItem from="1603123322571" duration="2567000" />
+      <workItem from="1603126020412" duration="33000" />
+      <workItem from="1603214437370" duration="182000" />
+      <workItem from="1603214663164" duration="525000" />
+      <workItem from="1604244022497" duration="103000" />
+      <workItem from="1604273347763" duration="255000" />
+      <workItem from="1604435180048" duration="37000" />
+      <workItem from="1606665277652" duration="383000" />
+      <workItem from="1607036223312" duration="15000" />
     </task>
     <task id="LOCAL-00012" summary="Clean up JS and CSS assets">
       <created>1598286764160</created>
@@ -433,7 +396,56 @@
       <option name="project" value="LOCAL" />
       <updated>1603119952403</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Jetbrains thing">
+      <created>1603122202849</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1603122202850</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Move the &quot;no plays&quot; append to maincontainer to prevent duplication">
+      <created>1603122581604</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1603122581605</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Add toggle for unprofitable plays, sort of fix sorting?">
+      <created>1603125893925</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1603125893926</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Change wording for the unprofitable plays tickbox">
+      <created>1603126045203</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1603126045204</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Prevent condition where NoRiskWithDraw AND NoRisk are both true">
+      <created>1603214561886</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1603214561887</updated>
+    </task>
+    <task id="LOCAL-00059" summary="ACTUALLY fix issue with norisk">
+      <created>1603215180902</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1603215180904</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Fix discount percentage to 10%">
+      <created>1604244115606</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1604244115607</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,13 +476,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Transition everything to cards (instead of table). Wow! Looks great" />
-    <MESSAGE value="Remove betmethodswitcher function as it's unused" />
-    <MESSAGE value="Remove datatables deps" />
-    <MESSAGE value="Add listJS" />
-    <MESSAGE value="Remove more Datatables stuff" />
-    <MESSAGE value="Implement ListJS sorting, filtering" />
-    <MESSAGE value="Add Fontawesome CSS" />
     <MESSAGE value="Add some font awesome icons" />
     <MESSAGE value="UX change on settings box" />
     <MESSAGE value="Add informational icons to settings" />
@@ -489,7 +494,14 @@
     <MESSAGE value="Some little semantics/organization changes for the sake of readability" />
     <MESSAGE value="Clean up comments" />
     <MESSAGE value="Add alert to reflect change from 12% -&gt; 10%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add alert to reflect change from 12% -&gt; 10%" />
+    <MESSAGE value="Jetbrains thing" />
+    <MESSAGE value="Move the &quot;no plays&quot; append to maincontainer to prevent duplication" />
+    <MESSAGE value="Add toggle for unprofitable plays, sort of fix sorting?" />
+    <MESSAGE value="Change wording for the unprofitable plays tickbox" />
+    <MESSAGE value="Prevent condition where NoRiskWithDraw AND NoRisk are both true" />
+    <MESSAGE value="ACTUALLY fix issue with norisk" />
+    <MESSAGE value="Fix discount percentage to 10%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix discount percentage to 10%" />
   </component>
   <component name="WindowStateProjectService">
     <state x="186" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598741106778">
@@ -504,10 +516,10 @@
       <screen x="0" y="0" width="1462" height="864" />
     </state>
     <state x="240" y="77" key="SettingsEditor/0.0.1462.864@0.0.1462.864" timestamp="1598746017334" />
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603119637739">
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2" timestamp="1603125897367">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
-    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1603119637739" />
+    <state x="324" y="165" key="Vcs.Push.Dialog.v2/0.0.1462.864@0.0.1462.864" timestamp="1603125897367" />
     <state x="337" y="42" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601476032978">
       <screen x="0" y="0" width="1462" height="864" />
     </state>
