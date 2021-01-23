@@ -1,8 +1,7 @@
 # gambitprofit-api-frontend
 Frontend HTML files for GambitProfit.com API (api.gambitprofit.com/gambit-plays)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/627b47ad-e30f-4cb9-aaa4-0e5fb34aef98/deploy-status)](https://app.netlify.com/sites/gambitprofit-api-frontend/deploys)
-
+## NOTE: Now superseded by unixfy/gambitprofit-new-frontend!!
 
 ## index.html
 
